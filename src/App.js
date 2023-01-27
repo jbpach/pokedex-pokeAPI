@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react"
 import PokemonCard from "./components/PokemonCard"
 import "./App.css"
+import PokemonSquare from "./components/PokemonSqaure"
 
 export default function App() {
     const [counter, setCounter] = useState(1)
 
     const [pokemon, setPokemon] = useState({})
+
+    const [pokemonArr, setPokemonArr] = useState([])
 
     // useEffect(() => {
     //     fetch(`https://pokeapi.co/api/v2/pokemon/${counter}`)
@@ -29,6 +32,16 @@ export default function App() {
     // }, [counter]) 
 
     useEffect(() => {
+        const fetchAllData = async () => {
+            const data = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=151`)
+            const json = await data.json()
+            setPokemonArr(json.results)
+        }
+        fetchAllData()
+            .catch(console.error)
+    }, [])
+
+    useEffect(() => {
         const fetchData = async () => {
             const data = await fetch(`https://pokeapi.co/api/v2/pokemon/${counter}`)
             const json = await data.json()  
@@ -50,26 +63,36 @@ export default function App() {
         })
     }
 
+    const pokemonArrElm = pokemonArr.map((pokemon) => {
+        return (
+            <PokemonSquare name={pokemon.name} url={pokemon.url} />
+        )
+    }) 
+
     return (
-        <div className="main">
-            <PokemonCard 
-
-                name={pokemon.name}
-                id={pokemon.id}
-
-                img={pokemon.sprites}
-
-                typesArr={pokemon.types}
-
-                weight={pokemon.weight}
-                height={pokemon.height}
-                abilitiesArr={pokemon.abilities}
-
-                statsArr={pokemon.stats}
-            />
-            
-            {pokemon.id > 1 && <button onClick={handlePrevPokemon}>Prev Pokemon</button>}
-            <button onClick={handleNextPokemon}>Next pokemon</button>
+        <div>
+            {/* <PokemonSquare name={pokemonArr[0] && pokemonArr[0].name} url={pokemonArr[0] && pokemonArr[0].url} /> */}
+            {pokemonArrElm}
         </div>
+        // <div className="main">
+        //     <PokemonCard 
+
+        //         name={pokemon.name}
+        //         id={pokemon.id}
+
+        //         img={pokemon.sprites}
+
+        //         typesArr={pokemon.types}
+
+        //         weight={pokemon.weight}
+        //         height={pokemon.height}
+        //         abilitiesArr={pokemon.abilities}
+
+        //         statsArr={pokemon.stats}
+        //     />
+            
+        //     {pokemon.id > 1 && <button onClick={handlePrevPokemon}>Prev Pokemon</button>}
+        //     <button onClick={handleNextPokemon}>Next pokemon</button>
+        // </div>
     )
 }

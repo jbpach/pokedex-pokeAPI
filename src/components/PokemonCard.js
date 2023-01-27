@@ -13,7 +13,7 @@ export default function PokemonCard(props) {
         ground: "#DEC16B", 
         rock: "#B69E31",
         bug: "#A7B723",
-        ghost: "70559B",
+        ghost: "#70559B",
         steel: "#B7B9D0",
         fire: "#F57D31",
         water: "#6493EB",
@@ -47,7 +47,7 @@ export default function PokemonCard(props) {
                     {props.typesArr &&
                         props.typesArr.map((type) => {
                             return (
-                                <li className="poke-type" style={{backgroundColor: props.typesArr ? backgroundStyle[type.type.name] : "transparent"}} key={type.slot}>{type.type.name}</li>
+                                <li className="poke-type" style={{backgroundColor: props.typesArr ? backgroundStyle[type.type.name] : "transparent"}} key={type.slot}>{ type.type.name && capitalizeFirstLetter(type.type.name) }</li>
                             )
                         })
                     }
