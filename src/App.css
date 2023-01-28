@@ -2,14 +2,25 @@
     margin: 0;
 }
 
+
+main {
+    padding-right: 20%;
+    padding-left: 20%;
+}
+
 .main {
-    padding: 36px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
+.poke-maingrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(208px, 1fr));
+    row-gap: 10px;
+    justify-items: center;
+}
 
 .poke-squareframe {
     width: 208px;

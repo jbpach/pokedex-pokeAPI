@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react"
 
 export default function PokemonSquare(props) {
-
-    
     const backgroundStyle = {
         normal: "#AAA67F",
         fighting: "#C12239",
@@ -42,18 +40,17 @@ export default function PokemonSquare(props) {
         color: pokemon.types ? backgroundStyle[pokemon.types[0].type.name] : "transparent"
     }
 
-
-
-    console.log(props)
-    console.log(pokemon)
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
     return (
-        <div className="poke-squareframe" style={divbgc}>
+        <div className="poke-squareframe" style={divbgc} onClick={() => props.clicked(pokemon.id)}>
             <div className="poke-sqaure">
                 <h1 style={h1c}>{`#${pokemon.id}`}</h1>
                 {pokemon.sprites && <img src={pokemon.sprites.other["official-artwork"].front_default} alt="official-artwork" /> }
             </div>
-            <h1>{pokemon.name}</h1>
+            <h1>{pokemon.name && capitalizeFirstLetter(pokemon.name)}</h1>
         </div>
     )
 }

@@ -1,5 +1,4 @@
 export default function PokemonStatBar(props) {
-
     const statName = {
         hp: "HP",
         attack: "ATK",
@@ -17,7 +16,6 @@ export default function PokemonStatBar(props) {
         backgroundColor: `${props.bgc}`
     }
 
-    console.log(props)
     return (
         <div className="poke-basestats">   
             <p style={{color: `${props.bgc}`}}>{statName[props.statname]}</p>
