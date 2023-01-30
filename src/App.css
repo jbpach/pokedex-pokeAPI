@@ -3,6 +3,35 @@
 }
 
 
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+}
+
+nav > h1 {
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 32px;
+    margin-right: auto;
+}
+
+nav > input {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 4px 8px;
+    gap: 16px;
+
+    width: 328px;
+    height: 24px;
+
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+}
+
 main {
     padding-right: 20%;
     padding-left: 20%;
@@ -16,8 +45,10 @@ main {
 }
 
 .poke-maingrid {
+    padding: 16px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(208px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-rows: auto;
     row-gap: 10px;
     justify-items: center;
 }

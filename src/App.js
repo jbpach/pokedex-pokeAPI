@@ -1,10 +1,17 @@
 import { useState, useEffect } from "react"
 import PokemonCard from "./components/PokemonCard"
 import PokemonSquare from "./components/PokemonSqaure"
+
+import { MdCatchingPokemon } from "react-icons/md"
+import { IconContext } from "react-icons/lib"
 import "./App.css"
 
 export default function App() {
     const [pokemonArr, setPokemonArr] = useState([])
+    const [renderCard, setRenderCard] = useState(false)
+    const [squareClicked, setSquareClicked] = useState(0)
+    const [search, setSearch] = useState("")
+    const [searchArr, setSearchArr] = useState([])
 
     useEffect(() => {
         const fetchAllData = async () => {
@@ -16,38 +23,69 @@ export default function App() {
             .catch(console.error)
     }, [])
 
-    const [renderCard, setRenderCard] = useState(false)
-    const [squareClicked, setSquareClicked] = useState(0)
-
     function pokeSquareClick(id) {
-        setRenderCard(true)
-        setSquareClicked(id)
+        if (id === 0) {
+            setRenderCard(false)
+            setSquareClicked(0)
+        }
+        else {
+            setRenderCard(true)
+            setSquareClicked(id)
+        }
     }
 
-    function returnBack() {
-        setRenderCard(false)
-        setSquareClicked(0)
+    function handleChange(event) {
+        const {value} = event.target
+        setSearch( value.toLowerCase() )
+        if (value) {
+            const resultsArray = pokemonArr.filter(pokemon => pokemon.name.includes(value))
+            setSearchArr(resultsArray)
+        }
+        else {
+            setSearchArr([])
+        }
     }
 
-    const pokemonArrElm = pokemonArr.map((pokemon) => {
+    const arrToMap = searchArr.length === 0 ? pokemonArr : searchArr
+
+    const pokemonArrElm = arrToMap.map((pokemon) => {
         return (
             <PokemonSquare clicked={pokeSquareClick} key={pokemon.name} name={pokemon.name} url={pokemon.url} />
         )
     }) 
 
     return (
-        <>
+        <>  
             <main>
             { !renderCard ?
+                <>
+                <nav>
+                    <IconContext.Provider value={{size: "2em"}}>
+                        <MdCatchingPokemon />
+                    </IconContext.Provider>
+
+                    <h1>Pokédex</h1>
+                    <input 
+                        type="search" 
+                        placeholder="Search"    
+                        name="search"
+                        value={search}
+                        onChange={handleChange}
+                    />
+                </nav>
+
+
                 <div className="poke-maingrid">
                     {pokemonArrElm}
                 </div>
+
+                </>
                 :
                 <div className="main">
                     <PokemonCard 
                         id={squareClicked}
                     />
-                    <button onClick={returnBack}>Go Back</button>
+                    <button onClick={() => {pokeSquareClick(0)}}>Go Back</button>
                 </div>
             }
             </main>
