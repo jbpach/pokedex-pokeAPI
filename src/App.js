@@ -2,8 +2,10 @@ import { useState, useEffect } from "react"
 import PokemonCard from "./components/PokemonCard"
 import PokemonSquare from "./components/PokemonSqaure"
 
-import { MdCatchingPokemon } from "react-icons/md"
 import { IconContext } from "react-icons/lib"
+import { MdCatchingPokemon, MdOutlineArrowBack } from "react-icons/md"
+
+
 import "./App.css"
 
 export default function App() {
@@ -82,10 +84,16 @@ export default function App() {
                 </>
                 :
                 <div className="main">
+                    <div className="poke-goback">
+                        <button className="poke-nextButton" onClick={() => {pokeSquareClick(0)}}>
+                            <IconContext.Provider value={{size: "2.5em"}}>
+                                <MdOutlineArrowBack />
+                            </IconContext.Provider>
+                        </button>
+                    </div>
                     <PokemonCard 
                         id={squareClicked}
                     />
-                    <button onClick={() => {pokeSquareClick(0)}}>Go Back</button>
                 </div>
             }
             </main>

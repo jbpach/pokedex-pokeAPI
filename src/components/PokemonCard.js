@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { IconContext } from "react-icons/lib";
 import { FaRulerVertical } from "react-icons/fa"
 import { GiWeight } from "react-icons/gi"
+import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md";
 import PokemonStatBar from "./PokemonStatBar"
 
 export default function PokemonCard(props) {
@@ -134,8 +135,20 @@ export default function PokemonCard(props) {
                 </div>
             </div>
 
-            {pokemonid > 1 &&<button onClick={handlePrevPokemon}>Prev Pokemon</button>}
-            {pokemonid < 151 && <button onClick={handleNextPokemon}>Next pokemon</button>}
+            <div className="poke-buttons">
+                {pokemonid > 1 &&<button className="poke-nextButton" onClick={handlePrevPokemon}>
+                    <IconContext.Provider value={{size: "2em"}}>
+                        <MdOutlineArrowBackIos />
+                    </IconContext.Provider>
+                </button>}
+            </div>
+            <div className="poke-buttons-r">
+                {pokemonid < 151 && <button className="poke-nextButton" onClick={handleNextPokemon}>
+                    <IconContext.Provider value={{size: "2em"}}>
+                        <MdOutlineArrowForwardIos />
+                    </IconContext.Provider>
+                </button>}
+            </div>
         </>
     )
 }

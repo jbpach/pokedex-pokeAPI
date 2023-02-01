@@ -2,6 +2,39 @@
     margin: 0;
 }
 
+.poke-goback {
+    position: absolute;
+    z-index: 1;
+    top: 35px;
+    margin-right: 300px;
+}
+
+.poke-buttons {
+    position: absolute;
+    top: 185px;
+    z-index: 1;
+    margin-right: 300px;
+}
+
+.poke-buttons-r {
+    position: absolute;
+    top: 185px;
+    z-index: 1;
+    margin-left: 300px;
+}
+
+.poke-nextButton {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    color: white;
+}
+
+.poke-nextButton:hover {
+    color: #d3d3d3;
+}
+
 
 nav {
     display: flex;
@@ -124,6 +157,7 @@ main {
     font-size: 24px;
     line-height: 32px;
     color: #FFFFFF;
+    margin-left: 30px;
 }
 
 .poke-heading > h2 {
